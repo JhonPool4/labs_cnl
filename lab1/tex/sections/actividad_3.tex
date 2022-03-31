@@ -1,0 +1,36 @@
+\subsection{Actividad 3: Diferencia entre modelo lineal y no lineal (16 pts)}
+El modelo matemático del módulo con carga lineal  está dado por:
+\begin{equation}
+	\frac{J_\mathrm{eq} R_m}{k_t} \ddot{\theta} + k_m \dot{\theta} = u,
+	\label{eq:act1_modulo_disco}
+\end{equation}
+donde $J_\mathrm{eq}$ es la inercia equivalente del sistema, $R_m$ es , $k_m$ es, $\theta$ es la posición angular del disco de masa lineal y $u$ es la señal de control. Con el objetivo de establecer el comportamiento temporal del sistema se define la siguiente ley de control
+\begin{equation}
+	u  = \frac{J_\mathrm{eq} R_m}{k_t} \ddot{\theta} (-2\lambda \dot{\theta} - \lambda^2 \theta) + k_m \dot{\theta}- \theta^2 - 50 \theta + 400,
+	\label{eq:act1_ley_de_control}
+\end{equation}
+donde $\lambda$ es parámetro de control relacionado con el tiempo de establecimiento del sistema.
+
+Desarrollar las preguntas de esta actividad con el archivo \texttt{simulink\_act\_1.xls}. Este archivo contiene tres bloques de subsistema: (i) \texttt{ley\_de\_control}, (ii) \texttt{modelo\_dinámico} y (iii) \texttt{guardar\_datos}. Por un lado, el bloque \texttt{ley\_de\_control} contiene los valores de cada parámetro necesario para calcular \eqref{eq:act1_ley_de_control}. Por otro lado, el bloque \texttt{modelo\_dinámico} contiene el bloque de escritura de Quanser para enviar la señal de control y el bloque de lectura para recibir la posición del motor . Finalmente, el bloque \texttt{guardar\_datos} guarda los estados del sistema y el tiempo de simulación. Para acceder al tiempo de simulación, posición y velocidad angular se debe usar \texttt{tiempo}, \texttt{x} y \texttt{dx} respectivamente.
+\begin{enumerate}
+	\item (2 pt) Obtener la ecuación del sistema en lazo cerrado.
+	
+	\item (2 pts) Determinar los puntos de equilibrio del del sistema en lazo cerrado.
+	
+	\item (2 pts) Implementar la ecuación del sistema en lazo cerrado. Usar el archivo \texttt{simulink\_act\_1.xls} y agregar imagen del contenido del bloque \texttt{ley\_de\_control}.
+	
+	\item (2 pts) Generar gráfica de posición respecto al tiempo del sistema en lazo cerrado para posición angular inicial de $20^{\circ}$, $30^{\circ}$, $50^{\circ}$ y $70^{\circ}$. Usar el archivo \texttt{simulink\_act\_1.xls} con las modificaciones del  bloque \texttt{ley\_de\_control} y usar la variable $\mathbf{x_0}= [\text{pos}, \text{ vel}]$ para establecer la condición inicial del sistema. 
+	
+	\item (1 pt) Indicar en que posición se establece el sistema en lazo cerrado para cada condición inicial.
+	
+	\item (1 pt)  Explicar porque el sistema en lazo cerrado se establece en esa posición.
+
+	\item (2 pts) Generar gráfica de posición respecto al tiempo del sistema en lazo cerrado para posición angular inicial de $0^{\circ}$, $-20^{\circ}$, $-30^{\circ}$ y $-80^{\circ}$. Usar el archivo \texttt{simulink\_act\_1.xls} con las modificaciones  del bloque \texttt{ley\_de\_control} y usar la variable $\mathbf{x_0}= [\text{pos}, \text{ vel}]$ para establecer la condición inicial del sistema. 	
+	
+	\item (1 pt) Indicar en que posición se establece el sistema en lazo cerrado para cada condición inicial.
+	
+	\item (1 pt)  Explicar porque el sistema en lazo cerrado se establece en esa posición.	
+	
+	\item (2 pts) Explicar porque el sistema en lazo cerrado no se establece en el punto de equilibrio $x_e=10^{\circ}$ a pesar de empezar en posiciones iniciales cercanas al punto de equilibrio. 
+
+\end{enumerate}

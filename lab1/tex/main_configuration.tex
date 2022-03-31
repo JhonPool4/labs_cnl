@@ -1,0 +1,111 @@
+% main_configuration.tex
+\documentclass{article}
+
+% ========
+% 	packages		
+% ========
+\usepackage[utf8]{inputenc} % to use special characters
+\usepackage{geometry} % page size
+\usepackage{fancyhdr} % page style
+\usepackage{float} % force image location
+\usepackage{graphicx, wrapfig, caption, subcaption} % figures
+\usepackage{amsmath, mathtools, esvect} % math 
+\usepackage{amssymb, amsfonts, amsthm}  % math
+\usepackage{xcolor} % colour
+%\usepackage{empheq} % emphasize equations 
+%\usepackage[most]{tcolorbox} % config box
+\usepackage{hyperref} % clickable files
+\usepackage{listings} % environment for code
+\usepackage{setspace} % space between lines
+
+% ==================
+% 	document information
+% ==================
+%\input{student_information} % add sutdent information (name and lastname) and store in \primeralumno and \secondalumno
+\newcommand{\course}{Control no lineal}
+\newcommand{\labnumber}{1}
+\newcommand{\labname}{Puntos de equilibrio}
+\newcommand{\period}{2022 - 2}
+
+% =============
+% 	pdf information
+% =============
+\hypersetup{%
+pdftitle   = {lab~\labnumber-\labname},
+pdfauthor  = {\firststudent~and~\secondstudent},
+colorlinks = true,
+linkcolor  = blue,
+urlcolor   = blue,
+citecolor  = blue
+}
+
+
+% ==============
+% page configuration
+% ==============
+\geometry{% 140 mm, 240 mm
+	%showframe, % show frames, useful to make figures
+  	papersize={210mm, 300mm},
+  	left   = 30mm,
+  	right  = 30mm,
+  	top    = 30mm,
+  	bottom = 30mm,
+  	heightrounded, % ensures the height is adjusted so that an integer number of lines are accommodated in the text block.
+}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{15pt}
+\lhead{\textit{\course}}
+\rfoot{-~\thepage~-}
+\lfoot{\textit{laboratorio~\labnumber:~\labname}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+%\renewcommand{\thesection}{\arabic{section}}
+%\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+%\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\setstretch{1.2}
+\captionsetup{justification=centering} % center labels
+
+
+% ===================
+% 	make front page
+% ===================
+\newcommand{\makefrontpage}{%
+	\thispagestyle{empty}
+	\begin{center}
+		\textbf{{\huge Universidad de Ingeniería y Tecnología}\\ [0.5cm]
+			{\LARGE Departamento de Ingenier\'ia  Mecatr\'onica}\\[2cm]
+		}
+		{\includegraphics[width=.4\textwidth]{images/utec_logo}}\\[2cm]
+
+		{\LARGE \textbf{\course}}\\[2em]
+		{\Large \textbf{Laboratorio \labnumber}}\\[1em]
+		{\Large \labname}\\[1.5cm] 		
+		{\Large \textbf{Profesora:}}\\ \vspace{1em}
+		{\Large Ruth~Canahuire} \\[1cm]
+		{\Large \textbf{Asistentes de enseñanza:}} \\ \vspace{1em} 
+		{\Large Jhon~Charaja y Ricardo~Terreros}\\[1cm]
+		{\Large \textbf{Estudiantes:}} \\ \vspace{1em} 
+		{\Large \firststudent~y~\secondstudent}\\[1.5cm]
+		{\Large \textbf{Lima - Perú}} \\[1.5em]
+		{\LARGE \textbf{\period}}
+	\end{center}
+	\newpage
+}
+
+\renewcommand{\maketitle}{%
+	\begin{center}
+	\vspace*{1cm}
+	{\huge \textbf{Laboratorio~\labnumber}} \\ \vspace{1em}
+	{\LARGE \textbf{\labname}} \\ \vspace{1cm}
+	\end{center}
+}
+
+% =========
+% 	my colors
+% =========
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}

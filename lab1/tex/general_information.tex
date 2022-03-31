@@ -1,0 +1,78 @@
+	\section{Objetivos}
+	\begin{itemize}
+		\item Aprender a conectar el QUBE-Servo 2
+		\item Entender el funcionamiento de los bloques de Quanser para recibir la posición del motor y enviar la señal de control.
+		\item Obtener los puntos de equilibrio de un modelo no lineal.
+		\item Aproximar ecuaciones diferenciales no lineales con la serie de Taylor.
+		\item Verificar la diferencia de comportamiento temporal entre un modelo no lineal y su aproximación lineal.
+	\end{itemize}
+	
+	\section{Desarrollo del laboratorio}
+	La adecuada presentación del reporte  de laboratorio debe considerar lo siguiente:
+	
+	\begin{itemize}
+		\item El reporte debe contener el procedimiento que justifique la respuesta de cada actividad desarrollada.
+		
+		\item El reporte debe indicar de manera clara que actividad e inciso se está desarrollando.
+		
+		\item El reporte debe contener gráficas que indiquen con una etiqueta la variable que representa cada eje.
+		
+		\item Se trabajará en grupos de 2 personas y solo es necesario que un
+		integrante de cada grupo presente el reporte, indicando el nombre de los
+		integrantes del grupo.
+		
+		\item El reporte debe ser presentado en formato pdf a través del buzón de Canvas.
+		
+		\item La presentación del reporte se realizará hasta el término de la sesión de
+		laboratorio. En caso de no presentar a la hora indicada se puede entregar hasta $10$ minutos después con una penalización de $5$ puntos en la nota del laboratorio. 
+	\end{itemize}
+	
+	Para el desarrollo de este laboratorio, se van a usar los archivos \texttt{pd\_position\_control\_disk.xls}, \texttt{simulink\_act\_1.xls}, \texttt{simulink\_act\_2.xls} y \texttt{generate\_plots.m}. Estos archivos contienen cuatro bloques de subsistema: (i) \texttt{dynamic\_model} y (ii) \texttt{save\_data}. Por un lado, el primer subsistema contiene el bloque de escritura de Quanser para enviar la señal de control y el bloque de lectura para recibir la posición del motor.  Por otro lado, el segundo subsistema guarda los estados del sistema y el tiempo de simulación como variables de la estructura \texttt{out}. A fin de evitar problemas de ejecución, coloque todos los archivos en una sola carpeta.
+	
+	\subsection{Modelo no lineal}
+	
+	La mayoría de sistemas dinámicos presentan relaciones no lineales entre las variables que lo conforman. El comportamiento temporal de estos sistemas se puede representar con un número finito $(\mathrm{n})$ de ecuaciones diferenciales de primer orden
+	\begin{equation}
+		\mathbf{\dot{x}} = f(\mathbf{x}),
+		\label{eq:eq_nonlinear}
+	\end{equation}
+	\noindent donde $\mathbf{x}=[\mathrm{x_1, x_2,..., x_n }]^\mathrm{T}$ representa el vector de los estados del sistema.
+	%\noindent donde $\mathbf{x} \in \mathbb{R}^{n}$ representa el vector de los estados del sistema y $\mathbf{u} \in \mathbb{R}^{n}$ representa el vector de entradas al sistema.
+	
+	\subsection{Punto de equilibrio}
+	El punto de equilibrio $(\mathbf{x_e})$ representa la ubicación donde los estados de un sistema permanecen constantes de manera indefinida. Por este motivo, los puntos de equilibrio de un modelo no lineal, como de \eqref{eq:eq_nonlinear}, se obtienen resolviendo $f(\mathbf{x})=\mathbf{0}$. La característica de cada punto de equilibrio $(\mathbf{x_e})$, junto con las condiciones iniciales $(\mathbf{x}(0))$, define el comportamiento temporal de cada modelo no lineal.
+	
+	
+	\subsection{Aproximación lineal con serie de Taylor}
+	La serie de Taylor aproxima el resultado de una función para un valor establecido de cada variable de entrada. El proceso de aproximación consiste en la suma infinita de derivadas de cada variable de la función. En este laboratorio solo es necesario considerar hasta la primera derivada de cada variable de la función. De este modo, la aproximación lineal de \eqref{eq:eq_nonlinear}, con $(\mathbf{x_e})$ como punto de equilibrio, se calcula como
+	%Considerar que $(\mathbf{x_e}$, $\mathbf{u_e})$ es un punto de equilibrio de \eqref{eq:eq_nonlinear}. Entonces, el modelo lineal se puede calcular como
+	\begin{equation}
+		\mathbf{\dot{x}} \approx  
+		f(\mathbf{x_e}) + 
+		\left. \frac{\partial{f(\mathbf{x})}}{\partial{\mathbf{x}}} \right\vert_{\mathbf{x_e}} (\mathbf{x}-\mathbf{x_e}),
+		\label{eq:eq_lineal}
+	\end{equation}
+	donde $\frac{\partial{f(\mathbf{x})}}{\partial{\mathbf{x}}}$ representa la matriz jacobiana.
+	
+	El proceso de aproximación se puede realizar de forma computacional usando la función \texttt{jacobian()} de MATLAB. De esta forma, la aproximación lineal se calcula como 
+	\begin{align*}
+		\frac{\partial{f(\mathbf{x})}}{\partial{\mathbf{x}}} &=
+		\texttt{jacobian}(f(\mathbf{x}), \mathbf{x}),
+	\end{align*}
+	\noindent donde el primer término es la función no lineal y el segundo las variables a derivar.
+	
+	\subsection{Estabilidad mediante linealización}
+	El comportamiento temporal del modelo no lineal \eqref{eq:eq_nonlinear} y su aproximación lineal \eqref{eq:eq_lineal} es similar cerca del punto de equilibrio $(\mathbf{x_e})$. Por consiguiente, ambos modelos comparten el mismo tipo de estabilidad cerca del punto de equilibrio. De ahí, la estabilidad del modelo no lineal se puede determinar a través de su aproximación lineal.
+	
+	%La estabilidad del modelo lineal \eqref{eq:eq_lineal} 
+	Los valores propios $(\lambda)$ de la matriz jacobiana determinan la estabilidad del modelo lineal \eqref{eq:eq_lineal}. La aproximación lineal es estable si la parte real de los valores propios $(\lambda)$ es menor a cero, de otro modo, el sistema es inestable. Los valores propios se obtienen resolviendo
+	\begin{equation}
+		\mathrm{det}\left(A - \lambda \mathrm{I} \right),
+	\end{equation}
+	\noindent donde $\mathrm{det(\cdot)}$ denota la función determinante, $A=\frac{\partial{f(\mathbf{x})}}{\partial{\mathbf{x}}}$ es la matriz jacobiana de $f(\mathbf{x})$ y $\mathrm{I}$ la matriz identidad.
+	
+	Los valores propios se pueden obtener de forma computacional usando la función \texttt{eig()} de MATLAB. De esta forma, los valores propios se calculan como
+	\begin{equation*}
+		\lambda = \texttt{eig}\left(\frac{\partial{f(\mathbf{x})}}{\partial{\mathbf{x}}}\right),
+	\end{equation*}
+	\noindent donde la variable de entrada es la matriz jacobiana de $f(\mathbf{x})$.		
