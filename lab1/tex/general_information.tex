@@ -1,10 +1,16 @@
 	\section{Objetivos}
 	\begin{itemize}
 		\item Aprender a conectar el QUBE-Servo 2
+		
 		\item Entender el funcionamiento de los bloques de Quanser para recibir la posición del motor y enviar la señal de control.
+		
 		\item Obtener los puntos de equilibrio de un modelo no lineal.
+	
+		\item Entender el efecto de las condiciones iniciales en el comportamiento temporal de un modelo no lineal.
+	
 		\item Aproximar ecuaciones diferenciales no lineales con la serie de Taylor.
-		\item Verificar la diferencia de comportamiento temporal entre un modelo no lineal y su aproximación lineal.
+		
+		%Vericar la diferencia de comportamiento temporal entre un modelo no lineal y su aproximacion lineal.
 	\end{itemize}
 	
 	\section{Desarrollo del laboratorio}
@@ -27,7 +33,7 @@
 		laboratorio. En caso de no presentar a la hora indicada se puede entregar hasta $10$ minutos después con una penalización de $5$ puntos en la nota del laboratorio. 
 	\end{itemize}
 	
-	Para el desarrollo de este laboratorio, se van a usar los archivos \texttt{pd\_position\_control\_disk.xls}, \texttt{simulink\_act\_1.xls}, \texttt{simulink\_act\_2.xls} y \texttt{generate\_plots.m}. Estos archivos contienen cuatro bloques de subsistema: (i) \texttt{dynamic\_model} y (ii) \texttt{save\_data}. Por un lado, el primer subsistema contiene el bloque de escritura de Quanser para enviar la señal de control y el bloque de lectura para recibir la posición del motor.  Por otro lado, el segundo subsistema guarda los estados del sistema y el tiempo de simulación como variables de la estructura \texttt{out}. A fin de evitar problemas de ejecución, coloque todos los archivos en una sola carpeta.
+	Para el desarrollo de este laboratorio, se van a usar los archivos \texttt{pd\_position\_control\_disk.xls}, \texttt{pd\_control\_inverted\_pedulum.xls} y \texttt{simulink\_act\_1.xls}. Estos archivos contienen tres bloques de subsistema: (i) \texttt{ley\_de\_control}, (ii) \texttt{modelo\_dinámico} y (iii) \texttt{guardar\_datos}. Por un lado, el bloque \texttt{ley\_de\_control} contiene los valores de cada parámetro necesario para calcular la señal de control. Por otro lado, el bloque \texttt{modelo\_dinámico} contiene el bloque de escritura de Quanser para enviar la señal de control y el bloque de lectura para recibir la posición del motor . Finalmente, el bloque \texttt{guardar\_datos} guarda los estados del sistema y el tiempo de simulación.  A fin de evitar problemas de ejecución, coloque todos los archivos en una sola carpeta.
 	
 	\subsection{Modelo no lineal}
 	
